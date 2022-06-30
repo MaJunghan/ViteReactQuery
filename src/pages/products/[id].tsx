@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import ProductDetail from "../../component/Product/Detail";
 import { fetcher, QueryKeys } from "../../queryClient";
 import { Product } from "../../types";
 
@@ -15,28 +16,10 @@ const ProductDetailPage = () => {
 
   if (!data) return null;
 
-  const {
-    category,
-    title,
-    image,
-    price,
-    description,
-    rating: { rate },
-  } = data;
-
   return (
-    <div>
-      <ul>
-        <div className="product-detail">
-          <p className="product-detail-cetegory">{category}</p>
-          <p className="product-detail-title">{title}</p>
-          <img className="product-detail-image" src={image} />
-          <p className="product-detail-description">{description}</p>
-          <span className="product-detail-price">{price}</span>
-          <span className="product-detail-rate">{rate}</span>
-        </div>
-      </ul>
-    </div>
+    <ul>
+      <ProductDetail item={data} />
+    </ul>
   );
 };
 
