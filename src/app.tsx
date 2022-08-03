@@ -5,6 +5,11 @@ import { routes } from "./routes"; // or use Vite's alias to simplify import pat
 import { ReactQueryDevtools } from "react-query/devtools";
 import Gnb from "./component/gnb";
 import "./scss/index.scss";
+import { worker } from "./mocks/browser";
+
+if (process.env.NODE_ENV) {
+  worker.start();
+}
 
 function App() {
   const element = useRoutes(routes);

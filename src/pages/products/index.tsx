@@ -1,21 +1,18 @@
 import { useQuery } from "react-query";
-import { fetcher, QueryKeys } from "../../queryClient";
-import { Product } from "../../types";
+import { grapqhFetcher, QueryKeys } from "../../queryClient";
+import { Products } from "../../graphql/product";
 import ProductItem from "../../component/Product/ProductItem";
+import GET_PRODUCTS from "../../graphql/product";
 
 const ProductListPage = () => {
-  const { data } = useQuery<Product[]>(QueryKeys.PRODUCTS, () =>
-    fetcher({
-      method: "GET",
-      path: "/products",
-    })
+  const { data } = useQuery<Products>(QueryKeys.PRODUCTS, () =>
+    grapqhFetcher(GET_PRODUCTS)
   );
-  console.log(data);
 
   return (
     <div>
       <ul className="products">
-        {data?.map((product) => (
+        {data?.products?.map((product: any) => (
           <ProductItem {...product} key={product.id} />
         ))}
       </ul>
